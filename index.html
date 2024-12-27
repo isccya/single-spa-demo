@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/single-spa/5.9.3/umd/single-spa.min.js"></script> -->
+
+    <script type="module">
+        // const { registerApplication, start } = singleSpa
+        import { registerApplication, start } from "./single-spa/single-spa.js";
+
+        let app1 = {
+            bootstrap: [
+                async () => console.log("app1 bootstrap1"),
+                async () => console.log("app1 bootstrap2")
+            ],
+            mount: async () => {
+                app.innerHTML = "a";
+                console.log('app1 mount');
+            },
+            unmount: async () => {
+                console.log('app1 unmount');
+            }
+        }
+
+        let app2 = {
+            bootstrap: async () => ("app2 bootstrap1"),
+            mount: async () => {
+                app.innerHTML = "b";
+                console.log('app2 mount');
+            },
+            unmount: async () => {
+                console.log('app2 unmount');
+            }
+        }
+
+        // 注册应用就是看一下路径是否匹配，如果匹配就加载对应的应用 
+        registerApplication('a', async () => app1, location => location.hash.startsWith('#/a'), { a: 1 });
+        registerApplication('b', async () => app2, location => location.hash.startsWith('#/b'), { a: 1 });
+
+        //开启监控，路径切换时候调用对应的mount 、 unmount
+        // start();
+    </script>
+
+</body>
+
+</html>
