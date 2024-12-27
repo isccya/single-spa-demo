@@ -1,3 +1,14 @@
+/**
+ * 当前文件：
+ * 
+ * 1. 管理子应用注册
+ * 
+ * 
+ * 2. 每注册一个应用调用一次reroute，判断当前应用是被加载挂载or卸载。
+ * 
+ * 
+ * */ 
+
 import { reroute } from "../navigation/reroute.js";
 import { NOT_LOADED } from "./app.helpers.js";
 

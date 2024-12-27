@@ -1,3 +1,11 @@
+/**
+ * 当前文件：
+ * 1. 定义子应用的状态。
+ * 
+ * 2. 根据子应用的状态判断其属于哪一个：appsToLoad需要被加载，appsToMounted需要被挂载，appsToUnmounted需要被卸载。
+ * 
+ * */ 
+
 import { apps } from "./app.js"
 
 export const NOT_LOADED = 'NOT_LOADED' // 没有被加载
@@ -22,7 +30,7 @@ export function isActive(app) {
     return app.status == MOUNTED;
 }
 
-// 当前应用是否正在被激活
+// 当前应用是否需要被激活
 export function shouldBeAcitve(app) {    
     return app.activeWhen(window.location);
 }
