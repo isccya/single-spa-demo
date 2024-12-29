@@ -39,12 +39,12 @@
             }
         }
 
-        // 注册应用就是看一下路径是否匹配，如果匹配就加载对应的应用 
+        // 加载：注册应用就是看一下路径是否匹配，如果匹配就加载对应的应用
         registerApplication('a', async () => app1, location => location.hash.startsWith('#/a'), { a: 1 });
         registerApplication('b', async () => app2, location => location.hash.startsWith('#/b'), { a: 1 });
 
-        //开启监控，路径切换时候调用对应的mount 、 unmount
-        // start();
+        //挂载：开启监控，路径切换时候调用对应的mount 、 unmount
+        start();
     </script>
 
 </body>
