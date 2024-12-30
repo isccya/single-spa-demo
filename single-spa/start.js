@@ -1,4 +1,4 @@
-import { reroute } from "./navigation/reroute";
+import { reroute } from "./navigation/reroute.js";
 
 export let started = false; // 默认没有调用started方法
 

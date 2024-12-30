@@ -20,7 +20,6 @@
                 async () => console.log("app1 bootstrap2")
             ],
             mount: async () => {
-                app.innerHTML = "a";
                 console.log('app1 mount');
             },
             unmount: async () => {
@@ -31,7 +30,6 @@
         let app2 = {
             bootstrap: async () => ("app2 bootstrap1"),
             mount: async () => {
-                app.innerHTML = "b";
                 console.log('app2 mount');
             },
             unmount: async () => {
@@ -44,6 +42,7 @@
         registerApplication('b', async () => app2, location => location.hash.startsWith('#/b'), { a: 1 });
 
         //挂载：开启监控，路径切换时候调用对应的mount 、 unmount
+        debugger;
         start();
     </script>
 
