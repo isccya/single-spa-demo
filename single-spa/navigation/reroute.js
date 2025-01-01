@@ -4,9 +4,10 @@ import { toLoadPromise } from "../lifecycles/load.js";
 import { toMountPromise } from "../lifecycles/mount.js";
 import { toUnmountPromise } from "../lifecycles/unmount.js";
 import { started } from "../start.js";
-import { urlRoute } from "./navigation-event.js";
+import { callCaptureEventListeners, urlRoute } from "./navigation-event.js";
 
-export function reroute() {
+// 子应用路由监听hashchange、popstate触发urlroute事件，传入事件源event
+export function reroute(event) {
     // 获取app状态，进行分类
     const { appsToLoad, appsToMount, appsToUnmount } = getAppChanges();
 
@@ -24,7 +25,7 @@ export function reroute() {
 
     function loadApps() {
         // 根据需要加载的分类，加载对应的app
-        return Promise.all(appsToLoad.map(toLoadPromise));
+        return Promise.all(appsToLoad.map(toLoadPromise)).then(callEventListener);
     }
 
     function performAppChange() {
@@ -44,5 +45,13 @@ export function reroute() {
                 return toBootstrapPromise(app).then(app => unmountAllPromises.then(() => toMountPromise(app)))
             }
         }
+
+        return Promise.all([loadMountPromises, mountPromises]).then(()=>{
+            callEventListener();
+        })
+    }
+
+    function callEventListener(){ // 调用子应用的路由监听方法
+        callCaptureEventListeners(event);
     }
 }

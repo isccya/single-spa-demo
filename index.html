@@ -22,7 +22,9 @@
                 async () => console.log("app1 bootstrap2")
             ],
             mount: async () => {
-                console.log('app1 mount');
+                return Promise.resolve().then(() => {
+                        console.log('app1 mount');
+                })
             },
             unmount: async () => {
                 console.log('app1 unmount');
@@ -45,8 +47,11 @@
 
         //挂载：开启监控，路径切换时候调用对应的mount 、 unmount
         start();
-    </script>
 
+        window.addEventListener('hashchange', function () {
+            console.log(window.location.hash);
+        })
+    </script>
 </body>
 
 </html>
