@@ -9,8 +9,6 @@ export function urlRoute() {
 
 window.addEventListener('hashchange', urlRoute);
 window.addEventListener('popstate', urlRoute);
-window.addEventListener('pushstate', urlRoute);
-window.addEventListener('popstate', urlRoute);
 
 const capturedEventListeners = {
     hashchange: [],

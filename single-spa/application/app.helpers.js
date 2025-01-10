@@ -35,6 +35,7 @@ export function shouldBeAcitve(app) {
     return app.activeWhen(window.location);
 }
 
+// 获取哪些应用要被加载、哪些应用被挂载、哪些应用被卸载。
 export function getAppChanges() {
     const appsToLoad = []
     const appsToMount = []
